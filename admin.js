@@ -380,7 +380,21 @@ function saveStoreSettings() {
 function setupSidebarNavigation() {
   const sidebarLinks = document.querySelectorAll(".sidebar-link");
   const toggleBtn = document.getElementById("btnSidebarToggle");
+  const closeBtn = document.getElementById("btnSidebarClose");
+  const backdrop = document.getElementById("sidebarBackdrop");
   const sidebar = document.getElementById("adminSidebar");
+
+  const openSidebar = () => {
+    if (!sidebar) return;
+    sidebar.classList.add("open");
+    if (backdrop) backdrop.classList.add("active");
+  };
+
+  const closeSidebar = () => {
+    if (!sidebar) return;
+    sidebar.classList.remove("open");
+    if (backdrop) backdrop.classList.remove("active");
+  };
 
   sidebarLinks.forEach(link => {
     link.addEventListener("click", () => {
@@ -388,17 +402,78 @@ function setupSidebarNavigation() {
       switchDashboardTab(targetPaneId);
 
       // Close mobile sidebar on selection
-      if (sidebar && window.innerWidth <= 1080) {
-        sidebar.classList.remove("open");
+      if (window.innerWidth <= 1080) {
+        closeSidebar();
       }
     });
   });
 
-  if (toggleBtn && sidebar) {
-    toggleBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (sidebar && sidebar.classList.contains("open")) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
     });
   }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener("click", closeSidebar);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && sidebar && sidebar.classList.contains("open")) {
+      closeSidebar();
+    }
+  });
+
+  // Touch Swipe Gesture Support (Natural Right/Left Drawer Motion)
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener("touchend", (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+
+    // Only handle horizontal swipes
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 60) {
+      const isRtl = document.documentElement.dir === "rtl";
+
+      if (isRtl) {
+        // Swiping right moves sidebar off-screen (closes it)
+        if (diffX > 60 && sidebar && sidebar.classList.contains("open")) {
+          closeSidebar();
+        }
+        // Swiping left from near right edge opens sidebar
+        else if (diffX < -60 && touchStartX > window.innerWidth - 70) {
+          openSidebar();
+        }
+      } else {
+        // LTR mode
+        if (diffX < -60 && sidebar && sidebar.classList.contains("open")) {
+          closeSidebar();
+        } else if (diffX > 60 && touchStartX < 70) {
+          openSidebar();
+        }
+      }
+    }
+  }, { passive: true });
 }
 
 window.switchDashboardTab = function(paneId) {

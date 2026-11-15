@@ -271,13 +271,26 @@ body.admin-body {
 }
 
 /* ================= MAIN CONTENT WRAPPER ================= */
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 .admin-main-wrapper {
   flex: 1;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
   margin-inline-start: var(--admin-sidebar-width);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: #030305;
+  overflow-x: hidden;
 }
 
 /* Top App Bar */
@@ -295,12 +308,16 @@ body.admin-body {
   justify-content: space-between;
   padding: 0 2rem;
   gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .sidebar-toggle-btn {
@@ -315,6 +332,17 @@ body.admin-body {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-primary);
+}
+
+.topbar-page-title {
+  min-width: 0;
 }
 
 .topbar-page-title h2 {
@@ -322,17 +350,25 @@ body.admin-body {
   font-weight: 800;
   color: #fff;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .topbar-page-title small {
   color: var(--text-muted);
   font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
+  flex-shrink: 0;
 }
 
 .store-live-pill {
@@ -893,34 +929,101 @@ body.admin-body {
 }
 
 /* ================= RESPONSIVE DESIGN ================= */
+
+/* Sidebar Backdrop */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--admin-card-border);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: auto;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-close-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+/* Tablet & Mobile Screens (<= 1080px) */
 @media (max-width: 1080px) {
   :root {
     --admin-sidebar-width: 0px;
   }
 
-  .admin-sidebar {
-    transform: translateX(100%);
-    width: 280px;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
-  }
-
-  html[dir="rtl"] .admin-sidebar {
-    transform: translateX(100%);
-  }
-
-  html[dir="ltr"] .admin-sidebar {
-    transform: translateX(-100%);
-  }
-
-  .admin-sidebar.open {
-    transform: translateX(0) !important;
+  .admin-shell {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   .admin-main-wrapper {
-    margin-inline-start: 0;
+    margin-inline-start: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+
+  .admin-sidebar {
+    width: 290px;
+    max-width: 85vw;
+    z-index: 999;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+  }
+
+  /* RTL Mode: Sidebar is on the right side */
+  html[dir="rtl"] .admin-sidebar {
+    right: 0 !important;
+    left: auto !important;
+    transform: translateX(105%) !important;
+  }
+
+  /* LTR Mode: Sidebar is on the left side */
+  html[dir="ltr"] .admin-sidebar {
+    left: 0 !important;
+    right: auto !important;
+    transform: translateX(-105%) !important;
+  }
+
+  /* When open, slide smoothly into view */
+  html[dir="rtl"] .admin-sidebar.open,
+  html[dir="ltr"] .admin-sidebar.open,
+  .admin-sidebar.open {
+    transform: translateX(0) !important;
+    box-shadow: -10px 0 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(212, 175, 55, 0.25) !important;
   }
 
   .sidebar-toggle-btn {
+    display: flex;
+  }
+
+  .sidebar-close-btn {
     display: flex;
   }
 
@@ -933,46 +1036,157 @@ body.admin-body {
   }
 }
 
-@media (max-width: 640px) {
-  .admin-topbar {
-    padding: 0 1rem;
+/* Medium Mobile & Small Tablets (<= 768px) */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
   }
 
+  .admin-topbar {
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+  .topbar-left {
+    gap: 0.65rem;
+  }
+
+  .topbar-page-title small {
+    display: none !important;
+  }
+
+  .topbar-page-title h2 {
+    font-size: 1.05rem;
+  }
+
+  .topbar-right {
+    gap: 0.5rem;
+  }
+
+  .topbar-right .btn {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Standard Mobile (<= 640px) */
+@media (max-width: 640px) {
   .admin-content-body {
-    padding: 1.5rem 1rem 3rem 1rem;
+    padding: 1.25rem 0.85rem 3rem 0.85rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .kpi-stats-grid {
     grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+
+  .kpi-card {
+    padding: 1.15rem 1rem;
+    gap: 0.85rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .kpi-icon-box {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+
+  .kpi-info strong {
+    font-size: 1.65rem;
   }
 
   .section-toolbar {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.85rem;
   }
 
   .toolbar-search-box {
-    min-width: auto;
+    min-width: 0;
     width: 100%;
   }
 
   .toolbar-filters {
+    width: 100%;
+    display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .toolbar-filters select,
+  .toolbar-filters .btn {
+    flex: 1;
   }
 }
 
+/* Compact Mobile Screens (<= 480px) */
 @media (max-width: 480px) {
   .admin-topbar {
-    padding: 0 0.75rem;
+    padding: 0 0.65rem;
     height: 56px;
+    gap: 0.35rem;
   }
 
-  .admin-brand strong {
+  .sidebar-toggle-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .topbar-left {
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .topbar-page-title h2 {
     font-size: 0.92rem;
+    max-width: 130px;
   }
 
-  .admin-brand span {
-    font-size: 0.65rem;
+  .topbar-right {
+    gap: 0.35rem;
+  }
+
+  /* Compact Live Dot Pill on small screens */
+  .store-live-pill {
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .store-live-pill span:not(.store-live-dot) {
+    display: none !important;
+  }
+
+  .store-live-dot {
+    margin: 0;
+  }
+
+  /* Icon-only action buttons */
+  #btnQuickReset,
+  .topbar-right a.btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    flex-shrink: 0;
   }
 
   .admin-content-body {
@@ -983,12 +1197,19 @@ body.admin-body {
     padding: 1rem 0.75rem;
   }
 
-  .admin-table {
+  .admin-table-container {
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .admin-data-table {
     font-size: 0.78rem;
   }
 
-  .admin-table th, .admin-table td {
+  .admin-data-table th,
+  .admin-data-table td {
     padding: 0.6rem 0.5rem;
+    white-space: nowrap;
   }
 
   .admin-modal-card {
@@ -997,11 +1218,56 @@ body.admin-body {
     max-width: 95vw;
   }
 
-  .kpi-card {
-    padding: 1rem 0.85rem;
+  .shortcuts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ultra-Compact Screens (<= 360px) */
+@media (max-width: 360px) {
+  .topbar-page-title h2 {
+    font-size: 0.85rem;
+    max-width: 105px;
   }
 
-  .kpi-number {
-    font-size: 1.5rem;
+  .sidebar-toggle-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  #btnQuickReset,
+  .topbar-right a.btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .store-live-pill {
+    width: 28px;
+    height: 28px;
+  }
+
+  .kpi-card {
+    padding: 0.95rem 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .kpi-icon-box {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+
+  .kpi-info strong {
+    font-size: 1.45rem;
+  }
+
+  .kpi-info span {
+    font-size: 0.75rem;
+  }
+
+  .kpi-info small {
+    font-size: 0.68rem;
   }
 }
