@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>لوحة التحكم والإدارة الذكية | iPro Store & Lab</title>
+  <meta name="description" content="لوحة تحكم وإدارة متكاملة لمتجر ومعمل iPro Store - إدارة أجهزة الآيفون، الإكسسوارات الفاخرة، أسعار الصيانة، وسجل الاستفسارات">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Cairo & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Base Theme & Admin Stylesheets -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="lang-ar admin-body">
+
+  <!-- ================= 1. PIN SECURITY LOCK SCREEN ================= -->
+  <div class="admin-lock-overlay" id="adminLockOverlay">
+    <div class="lock-card">
+      <div class="lock-logo-wrapper">
+        <img src="assets/logo.jpg" alt="iPro Logo" class="lock-logo-img">
+      </div>
+      <h2>لوحة تحكم iPro Store</h2>
+      <p>منطقة الإدارة المشفرة. يرجى إدخال رمز الدخول السري (PIN).</p>
+
+      <form id="pinAuthForm" onsubmit="return false;">
+        <div class="pin-input-group">
+          <input type="password" id="adminPinInput" class="pin-field" maxlength="8" placeholder="••••" autocomplete="off" autofocus>
+          <button type="button" class="btn-toggle-pin" id="btnTogglePin" aria-label="إظهار الرمز">
+            <i class="fa-solid fa-eye" id="pinEyeIcon"></i>
+          </button>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-block" id="btnSubmitPin">
+          <i class="fa-solid fa-lock-open"></i>
+          <span>فتح لوحة التحكم</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= 2. DASHBOARD MAIN SHELL ================= -->
+  <div class="admin-shell">
+    
+    <!-- Collapsible Modern Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand-box">
+        <img src="assets/logo.jpg" alt="iPro Emblem" class="sidebar-logo">
+        <div class="sidebar-brand-text">
+          <h3>iPro Master</h3>
+          <span>Admin Lab v2.5</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button type="button" class="sidebar-link active" data-tab="paneOverview">
+          <div class="link-left">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>نظرة عامة والتحليلات</span>
+          </div>
+          <span class="sidebar-badge" id="sideBadgeOverview">Live</span>
+        </button>
+
+        <button type="button" class="sidebar-link" data-tab="paneDevices">
+          <div class="link-left">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <span>أجهزة الآيفون</span>
+          </div>
+          <span class="sidebar-badge" id="sideBadgePhones">0</span>
+        </button>
+
+        <button type="button" class="sidebar-link" data-tab="paneAccessories">
+          <div class="link-left">
+            <i class="fa-solid fa-headphones"></i>
+            <span>قسم الإكسسوارات</span>
+          </div>
+          <span class="sidebar-badge" id="sideBadgeAcc">0</span>
+        </button>
+
+        <button type="button" class="sidebar-link" data-tab="paneServices">
+          <div class="link-left">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <span>خدمات وتسعير الصيانة</span>
+          </div>
+          <span class="sidebar-badge" id="sideBadgeServices">0</span>
+        </button>
+
+        <button type="button" class="sidebar-link" data-tab="paneInquiries">
+          <div class="link-left">
+            <i class="fa-solid fa-comments"></i>
+            <span>سجل الاستفسارات والطلبات</span>
+          </div>
+          <span class="sidebar-badge" id="sideBadgeInquiries">0</span>
+        </button>
+
+        <button type="button" class="sidebar-link" data-tab="paneSettings">
+          <div class="link-left">
+            <i class="fa-solid fa-sliders"></i>
+            <span>إعدادات المتجر والتواصل</span>
+          </div>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" class="btn btn-outline-gold btn-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>معاينة المتجر المباشر</span>
+        </a>
+        <button type="button" class="btn btn-dark btn-sm" id="btnAdminLogout" style="border: 1px solid rgba(255,255,255,0.1);">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>قفل اللوحة والخروج</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="admin-main-wrapper">
+      
+      <!-- Topbar Header -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" id="btnSidebarToggle" aria-label="القائمة">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-page-title">
+            <h2 id="currentTabTitle">نظرة عامة والتحليلات</h2>
+            <small>مركز إدارة وتشغيل المتجر والمعمل الفوري</small>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="store-live-pill">
+            <span class="store-live-dot"></span>
+            <span>المتجر نشط وفوري</span>
+          </div>
+
+          <button type="button" class="btn btn-outline-gold btn-sm" id="btnQuickReset" title="إعادة تعيين البيانات للوضع الافتراضي">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span class="hide-mobile">استعادة الافتراضي</span>
+          </button>
+
+          <a href="index.html" class="btn btn-gold btn-sm">
+            <i class="fa-solid fa-store"></i>
+            <span class="hide-mobile">المتجر الرئيسي</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Dynamic Content Body -->
+      <main class="admin-content-body">
+        
+        <!-- ================= PANEL 1: OVERVIEW & ANALYTICS ================= -->
+        <section class="dashboard-panel active" id="paneOverview">
+          
+          <!-- 4 KPI Cards -->
+          <div class="kpi-stats-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
+              <div class="kpi-info">
+                <span>أجهزة الآيفون المعروضة</span>
+                <strong id="kpiPhonesCount">0</strong>
+                <small>تشمل سلاسل 15 حتى 18 وكسر الزيرو</small>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-box"><i class="fa-solid fa-headphones"></i></div>
+              <div class="kpi-info">
+                <span>الإكسسوارات الفاخرة</span>
+                <strong id="kpiAccessoriesCount">0</strong>
+                <small>شواحن، جرابات تيتانيوم، إيربودز، 9H</small>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-box"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+              <div class="kpi-info">
+                <span>خدمات وأسعار الصيانة</span>
+                <strong id="kpiServicesCount">0</strong>
+                <small>قطع أصلية فابريكا 100% وضمان سنة</small>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-box"><i class="fa-solid fa-comments"></i></div>
+              <div class="kpi-info">
+                <span>استفسارات وطلبات الواتساب</span>
+                <strong id="kpiInquiriesCount">0</strong>
+                <small>محادثات وحجوزات مسجلة</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analytics & Visual Charts Row -->
+          <div class="analytics-grid-row">
+            
+            <!-- Most Popular Models Chart -->
+            <div class="analytics-card">
+              <div class="card-header-bar">
+                <h3><i class="fa-solid fa-fire gold-text"></i> أكثر موديلات الآيفون طلباً واستفساراً</h3>
+                <span class="badge-tag-sm">إحصائيات حية</span>
+              </div>
+
+              <div class="chart-bars-list" id="popularModelsChart">
+                <div class="chart-bar-item">
+                  <div class="bar-labels">
+                    <span>iPhone 16 Pro Max (Desert Gold)</span>
+                    <strong>96%</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 96%;"></div></div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="bar-labels">
+                    <span>iPhone 17 Pro Max (Next-Gen)</span>
+                    <strong>88%</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="bar-labels">
+                    <span>iPhone 18 Pro Max (Ultra Flagship)</span>
+                    <strong>82%</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="bar-labels">
+                    <span>أجهزة كسر زيرو فابريكا فرز أول</span>
+                    <strong>74%</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 74%;"></div></div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="bar-labels">
+                    <span>iPhone 15 Pro Max (Titanium)</span>
+                    <strong>68%</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Traffic Breakdown -->
+            <div class="analytics-card">
+              <div class="card-header-bar">
+                <h3><i class="fa-solid fa-chart-pie gold-text"></i> توزيع نشاط واهتمام الزوار</h3>
+                <span class="badge-tag-sm">حسب الأقسام</span>
+              </div>
+
+              <div class="dept-stats-list">
+                <div class="dept-stat-row">
+                  <div class="dept-name">
+                    <i class="fa-solid fa-mobile-screen gold-text"></i>
+                    <span>مبيعات أجهزة الآيفون</span>
+                  </div>
+                  <div class="dept-pct">58%</div>
+                </div>
+
+                <div class="dept-stat-row">
+                  <div class="dept-name">
+                    <i class="fa-solid fa-screwdriver-wrench gold-text"></i>
+                    <span>معمل وخدمات الصيانة</span>
+                  </div>
+                  <div class="dept-pct">27%</div>
+                </div>
+
+                <div class="dept-stat-row">
+                  <div class="dept-name">
+                    <i class="fa-solid fa-headphones gold-text"></i>
+                    <span>قسم الإكسسوارات الفاخرة</span>
+                  </div>
+                  <div class="dept-pct">15%</div>
+                </div>
+              </div>
+
+              <div class="shortcuts-grid">
+                <button type="button" class="btn-shortcut" onclick="switchDashboardTab('paneDevices')">
+                  <i class="fa-solid fa-circle-plus"></i>
+                  <span>إضافة جهاز جديد</span>
+                </button>
+                <button type="button" class="btn-shortcut" onclick="switchDashboardTab('paneServices')">
+                  <i class="fa-solid fa-tags"></i>
+                  <span>تعديل تسعير الصيانة</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ================= PANEL 2: IPHONE CATALOG ================= -->
+        <section class="dashboard-panel" id="paneDevices">
+          
+          <div class="section-toolbar">
+            <div class="toolbar-search-box">
+              <i class="fa-solid fa-magnifying-glass gold-text"></i>
+              <input type="text" id="searchPhonesInput" placeholder="بحث باسم الموديل أو المعالج...">
+            </div>
+
+            <div class="toolbar-filters">
+              <select id="filterPhonesCategory" class="custom-select" style="min-width: 180px;">
+                <option value="all">جميع السلاسل</option>
+                <option value="iphone-18">سلسلة iPhone 18</option>
+                <option value="iphone-17">سلسلة iPhone 17</option>
+                <option value="iphone-16">سلسلة iPhone 16</option>
+                <option value="iphone-15">سلسلة iPhone 15</option>
+                <option value="certified">كسر زيرو فابريكا فرز أول</option>
+              </select>
+
+              <button type="button" class="btn btn-gold btn-sm" id="btnOpenAddPhoneModal">
+                <i class="fa-solid fa-plus"></i>
+                <span>إضافة جهاز آيفون</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>الجهاز والموديل</th>
+                  <th>السلسلة</th>
+                  <th>المعالج والمواصفات</th>
+                  <th>سعات التخزين</th>
+                  <th>حالة التوفر</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="phonesTableBody"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- ================= PANEL 3: ACCESSORIES CATALOG ================= -->
+        <section class="dashboard-panel" id="paneAccessories">
+          
+          <div class="section-toolbar">
+            <div class="toolbar-search-box">
+              <i class="fa-solid fa-magnifying-glass gold-text"></i>
+              <input type="text" id="searchAccessoriesInput" placeholder="بحث في الإكسسوارات...">
+            </div>
+
+            <div class="toolbar-filters">
+              <select id="filterAccessoriesCategory" class="custom-select" style="min-width: 180px;">
+                <option value="all">جميع الفئات</option>
+                <option value="chargers">شواحن MagSafe وكابلات</option>
+                <option value="cases">جرابات تيتانيوم وجلد</option>
+                <option value="audio">سماعات AirPods Pro</option>
+                <option value="glass">باغات حماية 9H</option>
+              </select>
+
+              <button type="button" class="btn btn-gold btn-sm" id="btnOpenAddAccModal">
+                <i class="fa-solid fa-plus"></i>
+                <span>إضافة إكسسوار جديد</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>المنتج</th>
+                  <th>الفئة</th>
+                  <th>السعر المعتمد</th>
+                  <th>الأجهزة المتوافقة</th>
+                  <th>فترة الضمان</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="accessoriesTableBody"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- ================= PANEL 4: REPAIR SERVICES & PRICING ================= -->
+        <section class="dashboard-panel" id="paneServices">
+          
+          <div class="section-toolbar">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0 0 0.25rem 0;">أسعار الصيانة الفورية المعتمدة</h3>
+              <small style="color: var(--text-muted);">يمكنك تعديل الأسعار مباشرة بالجدول والضغط على زر الحفظ</small>
+            </div>
+
+            <button type="button" class="btn btn-gold btn-sm" id="btnOpenAddServiceModal">
+              <i class="fa-solid fa-plus"></i>
+              <span>إضافة خدمة صيانة جديدة</span>
+            </button>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>خدمة الصيانة</th>
+                  <th>السعر بالجنيه (ج.م) [قابل للتعديل]</th>
+                  <th>مدة التنفيذ المقدرة</th>
+                  <th>الضمان المعتمد</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="servicesTableBody"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- ================= PANEL 5: INQUIRIES & ORDERS LOG ================= -->
+        <section class="dashboard-panel" id="paneInquiries">
+          
+          <div class="section-toolbar">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0 0 0.25rem 0;">سجل طلبات واستفسارات الواتساب</h3>
+              <small style="color: var(--text-muted);">يسجل تلقائياً أي استفسار أو طلب أسعار يتم من خلال الموقع</small>
+            </div>
+
+            <div class="toolbar-filters">
+              <button type="button" class="btn btn-outline-gold btn-sm" id="btnClearInquiries">
+                <i class="fa-solid fa-trash-can"></i>
+                <span>مسح السجل</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>القسم</th>
+                  <th>تفاصيل الاستفسار / الطلب</th>
+                  <th>التاريخ والوقت</th>
+                  <th>الرقم الموجه إليه</th>
+                  <th>إجراء فوري</th>
+                </tr>
+              </thead>
+              <tbody id="inquiriesTableBody"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- ================= PANEL 6: STORE SETTINGS & WHATSAPP ================= -->
+        <section class="dashboard-panel" id="paneSettings">
+          
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-sliders gold-text"></i> إعدادات المتجر وأرقام التواصل الرسمية</h3>
+            <p>أي تعديل تحفظه هنا ينعكس فوراً على الموقع الرئيسي بدون الحاجة لإعادة كتابة الأكواد.</p>
+
+            <form id="storeSettingsForm">
+              <div class="settings-grid">
+                
+                <div class="form-group">
+                  <label>رقم واتساب مبيعات وحجز الأجهزة (بدون +) *</label>
+                  <input type="text" id="settingWaDevices" value="201017891759" required>
+                  <small style="color:var(--text-muted); font-size:0.75rem;">المبيعات وحجز أجهزة الآيفون كاش وتقسيط</small>
+                </div>
+
+                <div class="form-group">
+                  <label>رقم واتساب قسم ومعمل الصيانة المعتمد *</label>
+                  <input type="text" id="settingWaMaintenance" value="201115373748" required>
+                  <small style="color:var(--text-muted); font-size:0.75rem;">الحجز المباشر واستفسارات الشاشات والبطاريات</small>
+                </div>
+
+                <div class="form-group">
+                  <label>رقم واتساب قسم الإكسسوارات الفاخرة *</label>
+                  <input type="text" id="settingWaAccessories" value="201101675132" required>
+                  <small style="color:var(--text-muted); font-size:0.75rem;">شواحن MagSafe، جرابات، وسماعات إيربودز</small>
+                </div>
+
+                <div class="form-group">
+                  <label>رمز الدخول السري للوحة التحكم (PIN) *</label>
+                  <input type="text" id="settingAdminPin" value="1234" required maxlength="8">
+                  <small style="color:var(--text-muted); font-size:0.75rem;">الرمز المطلوب لفتح هذه اللوحة</small>
+                </div>
+
+                <div class="form-group full-col">
+                  <label>نص شريط الإعلانات العلوي بالموقع *</label>
+                  <textarea id="settingAnnouncement" rows="2" required>عرض خاص: احصل على سكرينة حماية أصلية مجاناً + ضمان سنة مع أي جهاز تشتريه!</textarea>
+                </div>
+
+              </div>
+
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button type="submit" class="btn btn-gold">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  <span>حفظ كافة الإعدادات فوراً</span>
+                </button>
+
+                <button type="button" class="btn btn-dark" id="btnFactoryReset" style="border: 1px solid rgba(239,68,68,0.4); color:#f87171;">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <span>استعادة إعدادات المصنع للمتجر</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= 3. MODALS FOR ADD / EDIT ================= -->
+
+  <!-- A. ADD/EDIT PHONE MODAL -->
+  <div class="admin-modal-backdrop" id="modalPhone">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 id="modalPhoneTitle"><i class="fa-solid fa-mobile-screen gold-text"></i> إضافة جهاز آيفون جديد</h3>
+        <button type="button" class="modal-close-icon" onclick="closeAdminModal('modalPhone')">&times;</button>
+      </div>
+
+      <form id="formPhoneModal">
+        <input type="hidden" id="modalPhoneId">
+        <div class="admin-form-grid">
+          
+          <div class="form-group">
+            <label>اسم الموديل *</label>
+            <input type="text" id="mPhoneName" placeholder="مثال: iPhone 18 Pro Max" required>
+          </div>
+
+          <div class="form-group">
+            <label>السلسلة / الفئة *</label>
+            <select id="mPhoneCategory" class="custom-select" required>
+              <option value="iphone-18">سلسلة iPhone 18</option>
+              <option value="iphone-17">سلسلة iPhone 17</option>
+              <option value="iphone-16">سلسلة iPhone 16</option>
+              <option value="iphone-15">سلسلة iPhone 15</option>
+              <option value="certified">كسر زيرو فابريكا فرز أول</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>المعالج *</label>
+            <input type="text" id="mPhoneChip" placeholder="مثال: A19 Pro Bionic (2nm)" required>
+          </div>
+
+          <div class="form-group">
+            <label>مواصفات الشاشة *</label>
+            <input type="text" id="mPhoneDisplay" placeholder="مثال: 6.9 بوصة Micro-OLED 120Hz" required>
+          </div>
+
+          <div class="form-group">
+            <label>الكاميرا *</label>
+            <input type="text" id="mPhoneCamera" placeholder="مثال: 48MP فيوجن + 10x زووم بصري" required>
+          </div>
+
+          <div class="form-group">
+            <label>سعات التخزين (مفصولة بفاصلة) *</label>
+            <input type="text" id="mPhoneStorages" placeholder="256GB, 512GB, 1TB" required>
+          </div>
+
+          <div class="form-group">
+            <label>حالة الجهاز والضمان *</label>
+            <input type="text" id="mPhoneCondition" placeholder="مثال: جديد كرتونة متبرشم" required>
+          </div>
+
+          <div class="form-group">
+            <label>الشارة المميزة</label>
+            <input type="text" id="mPhoneBadge" placeholder="مثال: فلاجشيب آبل 2026">
+          </div>
+
+          <div class="form-group full-width" style="margin-top: 1rem;">
+            <button type="submit" class="btn btn-gold btn-block">
+              <i class="fa-solid fa-check"></i>
+              <span>حفظ بيانات الجهاز بالمتجر</span>
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- B. ADD/EDIT ACCESSORY MODAL -->
+  <div class="admin-modal-backdrop" id="modalAccessory">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 id="modalAccTitle"><i class="fa-solid fa-headphones gold-text"></i> إضافة إكسسوار جديد</h3>
+        <button type="button" class="modal-close-icon" onclick="closeAdminModal('modalAccessory')">&times;</button>
+      </div>
+
+      <form id="formAccModal">
+        <input type="hidden" id="modalAccId">
+        <div class="admin-form-grid">
+          
+          <div class="form-group">
+            <label>اسم الإكسسوار *</label>
+            <input type="text" id="mAccName" placeholder="مثال: شاحن لاسلكي MagSafe 25W أصلي" required>
+          </div>
+
+          <div class="form-group">
+            <label>القسم / التصنيف *</label>
+            <select id="mAccCategory" class="custom-select" required>
+              <option value="chargers">شواحن MagSafe وكابلات</option>
+              <option value="cases">جرابات تيتانيوم وجلد</option>
+              <option value="audio">سماعات AirPods Pro</option>
+              <option value="glass">باغات حماية 9H</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>السعر بالجنيه (ج.م) *</label>
+            <input type="number" id="mAccPrice" placeholder="مثال: 1450" required>
+          </div>
+
+          <div class="form-group">
+            <label>الأجهزة المتوافقة *</label>
+            <input type="text" id="mAccCompat" placeholder="مثال: iPhone 12 حتى iPhone 18" required>
+          </div>
+
+          <div class="form-group">
+            <label>فترة الضمان *</label>
+            <input type="text" id="mAccWarranty" placeholder="مثال: ضمان سنة معتمد واستبدال" required>
+          </div>
+
+          <div class="form-group">
+            <label>الشارة المميزة</label>
+            <input type="text" id="mAccBadge" placeholder="مثال: أصلي فابريكا Type-C">
+          </div>
+
+          <div class="form-group full-width">
+            <label>وصف المنتج *</label>
+            <textarea id="mAccDesc" rows="2" placeholder="أهم مميزات الإكسسوار وطريقة استخدامه..." required></textarea>
+          </div>
+
+          <div class="form-group full-width" style="margin-top: 1rem;">
+            <button type="submit" class="btn btn-gold btn-block">
+              <i class="fa-solid fa-check"></i>
+              <span>حفظ الإكسسوار بالمتجر</span>
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- C. ADD/EDIT SERVICE MODAL -->
+  <div class="admin-modal-backdrop" id="modalService">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 id="modalServiceTitle"><i class="fa-solid fa-screwdriver-wrench gold-text"></i> إضافة خدمة صيانة وتسعير</h3>
+        <button type="button" class="modal-close-icon" onclick="closeAdminModal('modalService')">&times;</button>
+      </div>
+
+      <form id="formServiceModal">
+        <input type="hidden" id="modalServiceId">
+        <div class="admin-form-grid">
+          
+          <div class="form-group">
+            <label>اسم خدمة الصيانة *</label>
+            <input type="text" id="mServiceTitle" placeholder="مثال: تغيير باغة زجاج الشاشة الأصلية" required>
+          </div>
+
+          <div class="form-group">
+            <label>السعر المعتمد (ج.م) *</label>
+            <input type="number" id="mServicePrice" placeholder="مثال: 1850" required>
+          </div>
+
+          <div class="form-group">
+            <label>مدة التنفيذ المقدرة *</label>
+            <input type="text" id="mServiceTime" placeholder="مثال: 30 - 45 دقيقة فوري" required>
+          </div>
+
+          <div class="form-group">
+            <label>فترة الضمان المعتمد *</label>
+            <input type="text" id="mServiceWarranty" placeholder="مثال: ضمان سنة كاملة معتمد" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label>وصف الخدمة ونوع قطع الغيار *</label>
+            <textarea id="mServiceDesc" rows="2" placeholder="تفاصيل الإصلاح والضمان وقطع الفابريكا المستخدمة..." required></textarea>
+          </div>
+
+          <div class="form-group full-width" style="margin-top: 1rem;">
+            <button type="submit" class="btn btn-gold btn-block">
+              <i class="fa-solid fa-check"></i>
+              <span>حفظ خدمة الصيانة والتسعير</span>
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Master Admin Controller -->
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>iPro Store | آي برو ستور - متجر ومعمل صيانة الآيفون المعتمد</title>
+  <meta name="description" content="iPro Store - أرقى متجر لبيع أجهزة الآيفون الأصلية والإكسسوارات وأحدث معمل صيانة فورية في مصر. استفسار الأجهزة: +201017891759 | الصيانة: +201115373748 | الإكسسوارات: +201101675132">
+  <meta name="keywords" content="iPro Store, ايفون 18, ايفون 17, اكسسوارات ايفون مصر, صيانة ايفون مصر">
+  
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Cairo (Arabic) & Outfit (English/Digits) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="lang-ar">
+
+
+
+  <!-- Top Announcement Bar (Fully Responsive) -->
+  <div class="top-announcement" id="topAnnouncement">
+    <div class="container announcement-inner">
+      <div class="announcement-left">
+        <span class="announcement-badge">
+          <i class="fa-solid fa-crown"></i> 
+          <span data-i18n="announcementBadge">الفرع المعتمد</span>
+        </span>
+        <p class="announcement-text" data-i18n="announcementText">عرض خاص: احصل على <span class="gold-highlight">سكرينة حماية أصلية مجاناً + ضمان سنة</span> مع أي جهاز تشتريه!</p>
+      </div>
+      
+      <div class="announcement-right">
+        <!-- Direct Quick WhatsApp Links -->
+        <a href="https://wa.me/201017891759" target="_blank" class="announcement-phone-pill" title="مبيعات الأجهزة">
+          <i class="fa-brands fa-whatsapp gold-text"></i>
+          <span>الأجهزة: <strong>01017891759</strong></span>
+        </a>
+        <a href="https://wa.me/201115373748" target="_blank" class="announcement-phone-pill" title="قسم الصيانة">
+          <i class="fa-solid fa-wrench gold-text"></i>
+          <span>الصيانة: <strong>01115373748</strong></span>
+        </a>
+        <a href="https://wa.me/201101675132" target="_blank" class="announcement-phone-pill" title="قسم الإكسسوارات">
+          <i class="fa-solid fa-headphones gold-text"></i>
+          <span>الإكسسوارات: <strong>01101675132</strong></span>
+        </a>
+        <button type="button" class="announcement-close" id="closeAnnouncementBtn" aria-label="Close">&times;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="site-header" id="header">
+    <nav class="navbar container">
+      <!-- Official 3D Gold Logo -->
+      <a href="index.html" class="brand-logo" id="brandLogo" aria-label="iPro Store Logo" title="iPro Store">
+        <div class="logo-image-wrapper">
+          <img src="assets/logo.jpg" alt="iPro Store Logo" class="brand-logo-img">
+        </div>
+      </a>
+
+      <!-- Navigation Links (Clean Single-Row Desktop Menu) -->
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="#hero" class="nav-link active" data-i18n="navHome">الرئيسية</a></li>
+        <li class="nav-item"><a href="#storeSection" class="nav-link" data-i18n="navStore">أجهزة الآيفون</a></li>
+        <li class="nav-item"><a href="#compareSection" class="nav-link">المقارنة الذكية</a></li>
+        <li class="nav-item"><a href="#accessoriesSection" class="nav-link" data-i18n="navAccessories">الإكسسوارات</a></li>
+        <li class="nav-item"><a href="#repairSection" class="nav-link" data-i18n="navRepair">خدمات الصيانة</a></li>
+        <li class="nav-item"><a href="#repairEstimator" class="nav-link" data-i18n="navEstimator">حاسبة الصيانة</a></li>
+        <li class="nav-item"><a href="#reviewsSection" class="nav-link">آراء العملاء</a></li>
+        <li class="nav-item"><a href="#branchLocation" class="nav-link" data-i18n="navBranch">مقر الفرع</a></li>
+      </ul>
+
+      <!-- Action Buttons Cluster -->
+      <div class="nav-actions">
+        <!-- Clean Bilingual Switcher -->
+        <div class="lang-switch-box" id="langSwitchBox">
+          <button type="button" class="lang-btn active" id="btnLangAr" data-lang="ar" onclick="toggleSiteLang('ar')">عربي 🇪🇬</button>
+          <span class="lang-sep">|</span>
+          <button type="button" class="lang-btn" id="btnLangEn" data-lang="en" onclick="toggleSiteLang('en')">EN 🇬🇧</button>
+        </div>
+
+        <button type="button" class="search-toggle-btn" id="searchToggleBtn" title="بحث سريع" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <a href="https://wa.me/201115373748?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%B9%D9%85%D9%84%20iPro%D8%8C%20%D8%AD%D8%A7%D8%A8%D8%A8%20%D8%A3%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%B5%D9%8A%D8%A7%D9%86%D8%A9%20%D9%81%D9%88%D8%B1%D9%8A%D8%A9" target="_blank" class="action-btn-book" id="openBookModalBtn" title="تواصل مع قسم الصيانة عبر واتساب">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <span data-i18n="btnBookRepair">احجز صيانة</span>
+        </a>
+
+        <button type="button" class="cart-trigger-btn" id="cartTriggerBtn" aria-label="Selected Devices List">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count-badge" id="cartCount">0</span>
+        </button>
+
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="القائمة">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Search Overlay Dropdown -->
+    <div class="search-overlay" id="searchOverlay">
+      <div class="container search-inner">
+        <div class="search-input-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="liveSearchInput" placeholder="ابحث عن آيفون 18، 17، جرابات ماج سيف، شاشات، بطاريات...">
+          <button type="button" class="clear-search-btn" id="clearSearchBtn">&times;</button>
+        </div>
+        <div class="search-quick-tags">
+          <span data-i18n="popularSearch">الأكثر بحثاً:</span>
+          <button type="button" class="quick-tag" data-tag="iPhone 18 Pro">آيفون 18 برو</button>
+          <button type="button" class="quick-tag" data-tag="iPhone 17">آيفون 17</button>
+          <button type="button" class="quick-tag" data-tag="MagSafe">ماج سيف</button>
+          <button type="button" class="quick-tag" data-tag="AirPods">سماعات إيربودز</button>
+          <button type="button" class="quick-tag" data-tag="شاشة">تغيير شاشة</button>
+          <button type="button" class="quick-tag" data-tag="بطارية">بطارية أصلية</button>
+        </div>
+        <div class="search-results-box" id="searchResultsBox"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Storefront Photo (Responsive) -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-gradients">
+      <div class="gold-radial-mesh top-left"></div>
+      <div class="gold-radial-mesh center-glow"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <div class="container hero-grid">
+      <!-- Content Column -->
+      <div class="hero-content">
+        <div class="hero-chip">
+          <span class="chip-pulse"></span>
+          <span class="chip-text" data-i18n="heroChip"><i class="fa-solid fa-award gold-icon"></i> المركز المعتمد الأول لبيع وصيانة الآيفون في مصر</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span data-i18n="heroTitle1">الفخامة الملكية في</span> <br>
+          <span class="gold-gradient-text" data-i18n="heroTitle2">عالم الآيفون</span> <br>
+          <span data-i18n="heroTitle3">& أقوى معمل صيانة فوري.</span>
+        </h1>
+
+        <p class="hero-description" data-i18n="heroDesc">
+          أهلاً بيك في <strong class="gold-text">iPro Store</strong>. بنقدملك تشكيلة حصرية من أحدث أجهزة iPhone حتى فئات 17 و 18 القادمة مع باقات الضمان المعتمد، وقسم إكسسوارات راقي، وأحدث معمل صيانة فوري لتصليح جهازك في 30 دقيقة بقطع غيار أصلية فابريكا 100% وأسعار معلنة وواضحة.
+        </p>
+
+        <!-- Direct Department CTAs -->
+        <div class="hero-cta-group">
+          <!-- WhatsApp Device Inquiry -->
+          <a href="https://wa.me/201017891759?text=%D9%85%D8%B3%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AE%D9%8A%D8%B1%20iPro%20Store%D8%8C%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%A3%D8%AC%D9%87%D8%B2%D8%A9%20%D8%A7%D9%84%D8%A2%D9%8A%D9%81%D9%88%D9%86" target="_blank" class="btn btn-gold btn-glow">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span data-i18n="heroBtnWhatsAppDevice">مبيعات الأجهزة: 01017891759</span>
+          </a>
+
+          <!-- WhatsApp Maintenance Inquiry -->
+          <a href="https://wa.me/201115373748?text=%D9%85%D8%B3%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AE%D9%8A%D8%B1%20iPro%20Store%D8%8C%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B5%D9%8A%D8%A7%D9%86%D8%A9%20%D9%81%D9%88%D8%B1%D9%8A%D8%A9%20%D9%84%D8%AC%D9%87%D8%A7%D8%B2%D9%8A" target="_blank" class="btn btn-outline-gold">
+            <i class="fa-solid fa-wrench"></i>
+            <span data-i18n="heroBtnWhatsAppRepair">صيانة الأجهزة: 01115373748</span>
+          </a>
+
+          <!-- WhatsApp Accessories Inquiry -->
+          <a href="https://wa.me/201101675132?text=%D9%85%D8%B3%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AE%D9%8A%D8%B1%20iPro%20Store%D8%8C%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%A5%D9%83%D8%B3%D8%B3%D9%88%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A2%D9%8A%D9%81%D9%88%D9%86" target="_blank" class="btn btn-outline-gold btn-accessory-pill">
+            <i class="fa-solid fa-headphones gold-text"></i>
+            <span data-i18n="heroBtnWhatsAppAcc">الإكسسوارات: 01101675132</span>
+          </a>
+        </div>
+
+        <!-- Metrics -->
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <span class="metric-number">100%</span>
+            <span class="metric-label" data-i18n="metric1">قطع غيار أصلية فابريكا</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <span class="metric-number">30 <small data-i18n="minUnit">دقيقة</small></span>
+            <span class="metric-label" data-i18n="metric2">صيانة فورية في الاستراحة</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <span class="metric-number">سنة</span>
+            <span class="metric-label" data-i18n="metric3">ضمان معتمد واستبدال</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Storefront Showcase Card (Second Photo) -->
+      <div class="hero-visual">
+        <div class="storefront-showcase-card glass-card-gold">
+          <div class="showcase-card-header">
+            <div class="store-badge-live">
+              <span class="live-dot-pulse"></span>
+              <span data-i18n="storeLiveOpen">الفرع مفتوح الآن لاستقبالكم</span>
+            </div>
+            <div class="store-logo-mini">
+              <img src="assets/logo.jpg" alt="iPro Gold Emblem" class="mini-gold-logo">
+            </div>
+          </div>
+
+          <div class="storefront-image-frame">
+            <img src="assets/store-front.jpg" alt="iPro Store Front Branch" class="storefront-photo" id="storefrontPhoto">
+            <div class="storefront-overlay-glow"></div>
+            
+            <div class="store-floating-tag tag-top">
+              <i class="fa-solid fa-location-dot gold-text"></i>
+              <span>مقر الفرع وصالة العرض VIP</span>
+            </div>
+            
+            <div class="store-floating-tag tag-bottom">
+              <i class="fa-solid fa-gem gold-text"></i>
+              <span>معمل صيانة معقم Clean Room</span>
+            </div>
+          </div>
+
+          <div class="storefront-card-footer">
+            <div class="store-address-brief">
+              <strong>فرع iPro Store الرئيسي</strong>
+              <small>صالة استقبال مجهزة • استلام وصيانة فورية</small>
+            </div>
+            <a href="#repairEstimator" class="btn btn-gold btn-sm">
+              <i class="fa-solid fa-calculator"></i>
+              <span data-i18n="quickEstimatorBtn">احسب تكلفة صيانتك</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPARTMENT 1: SELL MOBILE ITEMS (iPhone 18, 17, 16, 15, 14 - NO PRICES) -->
+  <section class="section-padding store-section" id="storeSection">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge"><i class="fa-solid fa-mobile-screen"></i> <span data-i18n="storeBadge">قسم بيع الأجهزة</span></div>
+        <h2 class="section-title"><span data-i18n="storeTitle1">أقوى تشكيلة من أجهزة</span> <span class="gold-gradient-text" data-i18n="storeTitle2">iPhone الأصلية</span></h2>
+        <p class="section-subtitle" data-i18n="storeSubtitle">متوفر أحدث موديلات Apple حتى فئات 17 و 18، وأجهزة كسر زيرو فابريكا فرز أول مع ضمان واستبدال فوري. (طلب السعر والحجز عبر واتساب: 01017891759).</p>
+      </div>
+
+      <!-- Filters & Category Navigation -->
+      <div class="store-filter-bar">
+        <div class="category-tabs" id="categoryTabs">
+          <button type="button" class="tab-btn active" data-category="all" data-i18n="tabAll">جميع الموديلات</button>
+          <button type="button" class="tab-btn tab-highlight" data-category="iphone-18"><i class="fa-solid fa-star gold-text"></i> سلسلة iPhone 18</button>
+          <button type="button" class="tab-btn tab-highlight" data-category="iphone-17"><i class="fa-solid fa-fire gold-text"></i> سلسلة iPhone 17</button>
+          <button type="button" class="tab-btn" data-category="iphone-16">سلسلة iPhone 16</button>
+          <button type="button" class="tab-btn" data-category="iphone-15">سلسلة iPhone 15</button>
+          <button type="button" class="tab-btn" data-category="iphone-14">سلسلة iPhone 14</button>
+          <button type="button" class="tab-btn" data-category="certified" data-i18n="tabUsed">كسر زيرو فابريكا فرز أول</button>
+        </div>
+
+        <div class="store-sort-box">
+          <label for="storeSortSelect"><i class="fa-solid fa-arrow-down-wide-short gold-text"></i> <span data-i18n="sortLabel">ترتيب:</span></label>
+          <div class="custom-select-wrapper">
+            <select id="storeSortSelect" class="custom-select">
+              <option value="featured" data-i18n="sortFeatured">المميز أولاً</option>
+              <option value="rating" data-i18n="sortRating">الأعلى تقييماً</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-chevron"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- iPhone Product Grid -->
+      <div class="product-grid" id="productGrid">
+        <!-- Rendered dynamically via index.js with NO prices -->
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE IPHONE COMPARISON TOOL -->
+  <section class="section-padding compare-section" id="compareSection">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge"><i class="fa-solid fa-code-compare"></i> <span>مقارنة أجهزة Apple</span></div>
+        <h2 class="section-title"><span>قارن بين أجهزة</span> <span class="gold-gradient-text">iPhone بدقة واحترافية</span></h2>
+        <p class="section-subtitle">اختر أي جهازين من تشكيلة iPro لترى المقارنة المباشرة في المعالج، الشاشة، الكاميرات، وسرعة الشحن لتختار الأنسب لاحتياجك.</p>
+      </div>
+
+      <div class="compare-card glass-card-luxury">
+        <!-- Selectors Row -->
+        <div class="compare-selectors-row">
+          <div class="compare-selector-box">
+            <label for="selectCompareDev1"><i class="fa-solid fa-mobile-screen gold-text"></i> اختر الهاتف الأول:</label>
+            <div class="custom-select-wrapper">
+              <select id="selectCompareDev1" class="custom-select compare-select"></select>
+              <i class="fa-solid fa-chevron-down select-chevron"></i>
+            </div>
+          </div>
+
+          <div class="compare-vs-badge">
+            <span>VS</span>
+          </div>
+
+          <div class="compare-selector-box">
+            <label for="selectCompareDev2"><i class="fa-solid fa-mobile-screen gold-text"></i> اختر الهاتف الثاني:</label>
+            <div class="custom-select-wrapper">
+              <select id="selectCompareDev2" class="custom-select compare-select"></select>
+              <i class="fa-solid fa-chevron-down select-chevron"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparative Columns -->
+        <div class="compare-results-grid" id="compareResultsGrid">
+          <!-- Rendered dynamically via index.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPARTMENT 2: ACCESSORIES SECTION (WhatsApp: +201101675132) -->
+  <section class="section-padding accessories-section" id="accessoriesSection">
+    <div class="accessories-bg-glow"></div>
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge"><i class="fa-solid fa-headphones"></i> <span data-i18n="accBadge">قسم الإكسسوارات الفاخرة</span></div>
+        <h2 class="section-title"><span data-i18n="accTitle1">أفخم إكسسوارات</span> <span class="gold-gradient-text" data-i18n="accTitle2">Apple الأصلية</span></h2>
+        <p class="section-subtitle" data-i18n="accSubtitle">شواحن MagSafe، جرابات تيتانيوم وجلد طبيعي، باغات حماية زجاجية 9H، وسماعات إيربودز بالضمان المعتمد. للتواصل والاستفسار عبر واتساب: <strong>01101675132</strong>.</p>
+      </div>
+
+      <!-- Accessories Filters & Category Navigation -->
+      <div class="store-filter-bar accessories-filter-bar">
+        <div class="category-tabs" id="accessoriesTabs">
+          <button type="button" class="tab-btn active" data-acc-cat="all"><i class="fa-solid fa-border-all"></i> <span data-i18n="tabAllAcc">جميع الإكسسوارات</span></button>
+          <button type="button" class="tab-btn tab-highlight" data-acc-cat="magsafe"><i class="fa-solid fa-bolt-lightning gold-text"></i> شواحن MagSafe</button>
+          <button type="button" class="tab-btn" data-acc-cat="cases"><i class="fa-solid fa-shield-halved gold-text"></i> جرابات وحماية</button>
+          <button type="button" class="tab-btn" data-acc-cat="audio"><i class="fa-solid fa-headphones gold-text"></i> سماعات AirPods</button>
+          <button type="button" class="tab-btn" data-acc-cat="glass"><i class="fa-solid fa-mobile-screen gold-text"></i> باغات زجاج 9H</button>
+          <button type="button" class="tab-btn" data-acc-cat="cables"><i class="fa-solid fa-plug gold-text"></i> كابلات ومحولات</button>
+        </div>
+
+        <div class="store-sort-box">
+          <label for="accSortSelect"><i class="fa-solid fa-arrow-down-wide-short gold-text"></i> <span data-i18n="sortLabel">ترتيب:</span></label>
+          <div class="custom-select-wrapper">
+            <select id="accSortSelect" class="custom-select">
+              <option value="featured" data-i18n="sortFeatured">المميز أولاً</option>
+              <option value="rating" data-i18n="sortRating">الأعلى تقييماً</option>
+              <option value="price-asc">الأقل سعراً</option>
+              <option value="price-desc">الأعلى سعراً</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-chevron"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accessories Grid -->
+      <div class="accessories-grid" id="accessoriesGrid">
+        <!-- Injected dynamically via index.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPARTMENT 3: MOBILE SERVICES (WITH REAL PRICING RESTORED) -->
+  <section class="section-padding repair-section" id="repairSection">
+    <div class="repair-bg-glow"></div>
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="repairBadge">قسم ومعمل الصيانة المعتمد</span></div>
+        <h2 class="section-title"><span data-i18n="repairTitle1">خدمات وأسعار الصيانة الفورية بأيدي</span> <span class="gold-gradient-text" data-i18n="repairTitle2">خبراء Apple</span></h2>
+        <p class="section-subtitle" data-i18n="repairSubtitle">أسعار صيانة واضحة ومعلنة بالجنيه المصري (ج.م) بقطع غيار أصلية فابريكا وضمان رسمي كتابي. للاستفسار والحجز المباشر تواصل عبر واتساب الصيانة: <strong>01115373748</strong>.</p>
+      </div>
+
+      <!-- Services Grid (With Prices!) -->
+      <div class="services-grid" id="servicesGrid">
+        <!-- Injected dynamically via index.js -->
+      </div>
+
+      <!-- Interactive Repair Cost Calculator -->
+      <div class="estimator-container" id="repairEstimator">
+        <div class="estimator-card glass-card-gold">
+          <div class="estimator-header">
+            <div class="estimator-header-left">
+              <span class="badge-gold"><i class="fa-solid fa-calculator"></i> <span data-i18n="calcBadge">تسعير شفاف وفوري</span></span>
+              <h3 data-i18n="calcTitle">حاسبة تكلفة الصيانة الفورية</h3>
+              <p data-i18n="calcDesc">اختر موديل جهازك ونوع الصيانة المطلوبة عشان تشوف السعر المقدر بالجنيه المصري ومدة الإصلاح والضمان فوراً.</p>
+            </div>
+            <div class="estimator-badge-express">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span data-i18n="calcExpressTag">معظم الصيانات بتخلص في 30 دقيقة</span>
+            </div>
+          </div>
+
+          <div class="estimator-form-grid">
+            <div class="form-group">
+              <label for="calcModelSelect"><i class="fa-solid fa-mobile gold-text"></i> <span data-i18n="calcStep1">1. اختر موديل جهاز الآيفون:</span></label>
+              <select id="calcModelSelect" class="custom-select large-select">
+                <option value="iphone-18-pro-max">iPhone 18 Pro Max</option>
+                <option value="iphone-18-pro">iPhone 18 Pro</option>
+                <option value="iphone-17-pro-max">iPhone 17 Pro Max</option>
+                <option value="iphone-17-pro">iPhone 17 Pro</option>
+                <option value="iphone-16-pro-max">iPhone 16 Pro Max</option>
+                <option value="iphone-16-pro" selected>iPhone 16 Pro</option>
+                <option value="iphone-16">iPhone 16</option>
+                <option value="iphone-15-pro-max">iPhone 15 Pro Max</option>
+                <option value="iphone-15-pro">iPhone 15 Pro</option>
+                <option value="iphone-15">iPhone 15</option>
+                <option value="iphone-14-pro-max">iPhone 14 Pro Max</option>
+                <option value="iphone-14">iPhone 14</option>
+                <option value="iphone-13-pro">iPhone 13 Pro</option>
+                <option value="iphone-12">iPhone 12 / 12 Pro</option>
+                <option value="iphone-11">iPhone 11</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calcServiceSelect"><i class="fa-solid fa-wrench gold-text"></i> <span data-i18n="calcStep2">2. اختر نوع الصيانة المطلوبة:</span></label>
+              <select id="calcServiceSelect" class="custom-select large-select">
+                <option value="screen">تغيير شاشة Super Retina OLED أصلية</option>
+                <option value="battery">تغيير بطارية أصلية عالية الكفاءة (صحة 100%)</option>
+                <option value="back-glass">تغيير زجاج الظهر بالليزر بدون فك البوردة</option>
+                <option value="camera">إصلاح الكاميرا وحساس الفوكس ومانع الاهتزاز</option>
+                <option value="water">إنقاذ ومعالجة السقوط في الماء والتنظيف بالموجات</option>
+                <option value="board">صيانة المايكروسولدرينج للبوردة وإصلاح FaceID</option>
+                <option value="port">إصلاح أو استبدال سوكت الشحن وسماعة المكالمات</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calculation-result-box" id="calcResultBox">
+            <div class="result-details">
+              <div class="result-item">
+                <span class="label">السعر المقدر:</span>
+                <span class="value price-value gold-gradient-text" id="calcPriceDisplay">3,850 ج.م</span>
+              </div>
+              <div class="result-item">
+                <span class="label" data-i18n="calcTimeLabel">وقت التنفيذ:</span>
+                <span class="value" id="calcTimeDisplay"><i class="fa-regular fa-clock gold-text"></i> 30-45 دقيقة فوري</span>
+              </div>
+              <div class="result-item">
+                <span class="label" data-i18n="calcWarrantyLabel">فترة الضمان:</span>
+                <span class="value" id="calcWarrantyDisplay"><i class="fa-solid fa-shield-check gold-text"></i> ضمان سنة معتمد iPro</span>
+              </div>
+            </div>
+
+            <div class="result-actions">
+              <button type="button" class="btn btn-gold" id="bookCalculatedServiceBtn">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span data-i18n="calcBookBtn">احجز موعد صيانة فوري</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIP CUSTOMER REVIEWS & RATINGS -->
+  <section class="section-padding reviews-section" id="reviewsSection">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge"><i class="fa-solid fa-star gold-text"></i> <span>تجارب وتقييمات موثقة</span></div>
+        <h2 class="section-title"><span>ماذا يقول عملاء</span> <span class="gold-gradient-text">iPro Store & Lab؟</span></h2>
+        <p class="section-subtitle">أكثر من 1,200+ عميل يثقون في معملنا لصيانة أجهزتهم وشراء هواتف الآيفون الأصلية بضمان كتابي معتمد.</p>
+      </div>
+
+      <!-- Overall Trust Summary Banner -->
+      <div class="reviews-summary-banner glass-card-gold">
+        <div class="summary-score-col">
+          <div class="score-big">4.9</div>
+          <div class="stars-gold">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <span>تقييم عام ممتاز (1,240+ عميل موثق)</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-badges-col">
+          <div class="trust-badge-pill">
+            <i class="fa-solid fa-shield-halved gold-text"></i>
+            <span>قطع غيار أصلية فابريكا 100%</span>
+          </div>
+          <div class="trust-badge-pill">
+            <i class="fa-solid fa-bolt gold-text"></i>
+            <span>صيانة فورية خلال 30 دقيقة أمامك</span>
+          </div>
+          <div class="trust-badge-pill">
+            <i class="fa-solid fa-certificate gold-text"></i>
+            <span>ضمان رسمي واستبدال فوري</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews Grid -->
+      <div class="reviews-grid">
+        <div class="review-card glass-card-luxury">
+          <div class="review-card-header">
+            <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+            <div class="reviewer-meta">
+              <strong>م. كريم عبد الرحمن</strong>
+              <small>عميل الفرع • صيانة شاشة</small>
+            </div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="review-service-tag"><i class="fa-solid fa-screwdriver-wrench gold-text"></i> تغيير شاشة iPhone 15 Pro Max أصلية</div>
+          <p class="review-text">"الشاشة فابريكا 100% ونقلوا التروتون وبصمة الوجه قدام عيني في صالة الاستراحة في أقل من 25 دقيقة مع ضمان سنة معتمد. قمة في الأمانة والسرعة والاحترافية."</p>
+          <div class="review-verified"><i class="fa-solid fa-circle-check"></i> فحص فني معتمد بالفرع</div>
+        </div>
+
+        <div class="review-card glass-card-luxury">
+          <div class="review-card-header">
+            <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+            <div class="reviewer-meta">
+              <strong>د. ميادة حسني</strong>
+              <small>عميلة الفرع • شراء هاتف</small>
+            </div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="review-service-tag"><i class="fa-solid fa-mobile-screen gold-text"></i> شراء iPhone 16 Pro Max كسر زيرو</div>
+          <p class="review-text">"الجهاز كأنه جديد تماماً زيرو كرتونة، نسبة البطارية 100% وبدون أي خدش، ومعاه جراب وسكرينة حماية ياقوتية هدية وضمان استبدال. شكراً لفريق iPro على الذوق العالي."</p>
+          <div class="review-verified"><i class="fa-solid fa-circle-check"></i> شراء مباشر من المعرض</div>
+        </div>
+
+        <div class="review-card glass-card-luxury">
+          <div class="review-card-header">
+            <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+            <div class="reviewer-meta">
+              <strong>أ. أحمد سامي الشناوي</strong>
+              <small>عميل المعمل • صيانة متقدمة</small>
+            </div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="review-service-tag"><i class="fa-solid fa-microchip gold-text"></i> إنقاذ جهاز ساقط في الماء وصيانة بوردة</div>
+          <p class="review-text">"الموبايل كان فاصل باور تماماً ومحروق بعد ما وقع في المية، مهندسين المعمل صلحوا البوردة واسترجعوا كل الصور والبيانات بدون أي فقدان وفي نفس اليوم. معجزة حقيقية!"</p>
+          <div class="review-verified"><i class="fa-solid fa-circle-check"></i> صيانة معملية ناجحة 100%</div>
+        </div>
+
+        <div class="review-card glass-card-luxury">
+          <div class="review-card-header">
+            <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+            <div class="reviewer-meta">
+              <strong>م. يوسف المهدي</strong>
+              <small>عميل المتجر • إكسسوارات فاخرة</small>
+            </div>
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="review-service-tag"><i class="fa-solid fa-headphones gold-text"></i> شاحن MagSafe 25W + سماعة AirPods Pro 2</div>
+          <p class="review-text">"منتجات أصلية بالكرتونة والضمان، الشاحن سريع جداً ومريح والسماعة عزل الضوضاء فيها ممتاز. التوصيل كان سريع والتعامل راقي جداً."</p>
+          <div class="review-verified"><i class="fa-solid fa-circle-check"></i> منتجات أصلية بضمان رسمي</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Branch Spotlight Section (Enhanced with Interactive Google Maps) -->
+  <section class="section-padding branch-section" id="branchLocation">
+    <div class="container">
+      <div class="branch-card glass-card-gold">
+        <div class="branch-grid">
+          <div class="branch-image-box">
+            <!-- Media View Switcher -->
+            <div class="branch-media-tabs">
+              <button type="button" class="branch-tab-btn active" id="btnBranchPhotoTab"><i class="fa-solid fa-camera"></i> صالة الفرع</button>
+              <button type="button" class="branch-tab-btn" id="btnBranchMapTab"><i class="fa-solid fa-map-location-dot"></i> خريطة الموقع</button>
+            </div>
+            
+            <div class="branch-view-pane active" id="branchPhotoPane">
+              <img src="assets/store-front.jpg" alt="iPro Store Branch Front" class="branch-real-img">
+              <div class="branch-img-badge">
+                <i class="fa-solid fa-shield-halved gold-text"></i>
+                <span>الفرع الرسمي المعتمد</span>
+              </div>
+            </div>
+
+            <div class="branch-view-pane" id="branchMapPane">
+              <div class="map-embed-wrapper">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110532.71104618214!2d31.258464!3d30.0594885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg" 
+                  width="100%" 
+                  height="420" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="موقع فرع iPro Store على Google Maps">
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="branch-info-box">
+            <div class="badge-gold"><i class="fa-solid fa-store"></i> <span data-i18n="branchBadge">مرحباً بكم في iPro Store</span></div>
+            <h2 data-i18n="branchTitle">تفضل بزيارتنا في مقر الفرع</h2>
+            <p data-i18n="branchDesc">استمتع بتجربة تسوق راقية وشراء مباشر لأحدث أجهزة الآيفون والإكسسوارات مع استلام فوري، أو تفضل بالجلوس في صالة الاستراحة VIP بينما يقوم مهندسونا بفحص وصيانة جهازك أمامك في خلال 30 دقيقة.</p>
+
+            <div class="branch-contacts-list">
+              <div class="contact-card-item">
+                <div class="item-icon-gold"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="item-details-text">
+                  <strong data-i18n="branchSalesLabel">مبيعات وحجز الأجهزة:</strong>
+                  <a href="https://wa.me/201017891759" target="_blank" class="gold-link">+20 101 789 1759</a>
+                </div>
+              </div>
+
+              <div class="contact-card-item">
+                <div class="item-icon-gold"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <div class="item-details-text">
+                  <strong data-i18n="branchRepairLabel">قسم ومعمل الصيانة:</strong>
+                  <a href="https://wa.me/201115373748" target="_blank" class="gold-link">+20 111 537 3748</a>
+                </div>
+              </div>
+
+              <div class="contact-card-item">
+                <div class="item-icon-gold"><i class="fa-solid fa-headphones"></i></div>
+                <div class="item-details-text">
+                  <strong data-i18n="branchAccLabel">قسم الإكسسوارات الفاخرة:</strong>
+                  <a href="https://wa.me/201101675132" target="_blank" class="gold-link">+20 110 167 5132</a>
+                </div>
+              </div>
+
+              <div class="contact-card-item">
+                <div class="item-icon-gold"><i class="fa-regular fa-clock"></i></div>
+                <div class="item-details-text">
+                  <strong data-i18n="branchHoursLabel">مواعيد العمل اليومية:</strong>
+                  <span data-i18n="branchHoursText">يومياً من 11:00 صباحاً حتى 11:30 مساءً (الجمعة من 1:30 ظهراً)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="branch-actions-row">
+              <a href="https://wa.me/201017891759" target="_blank" class="btn btn-gold btn-sm">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span data-i18n="btnBranchSales">مبيعات الأجهزة</span>
+              </a>
+              <a href="https://wa.me/201115373748" target="_blank" class="btn btn-outline-gold btn-sm">
+                <i class="fa-solid fa-wrench"></i>
+                <span data-i18n="btnBranchRepair">قسم الصيانة</span>
+              </a>
+              <a href="https://wa.me/201101675132" target="_blank" class="btn btn-outline-gold btn-sm">
+                <i class="fa-solid fa-headphones"></i>
+                <span data-i18n="btnBranchAcc">الإكسسوارات</span>
+              </a>
+              <a href="https://maps.google.com/?q=iPro+Store+Egypt" target="_blank" class="btn btn-outline-gold btn-sm" title="فتح اتجاهات الفرع عبر خرائط جوجل">
+                <i class="fa-solid fa-location-dot gold-text"></i>
+                <span>مسار الخريطة GPS</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Completely Responsive & Formatted) -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Col 1 -->
+      <div class="footer-col">
+        <a href="index.html" class="brand-logo footer-logo" aria-label="iPro Store Logo" title="iPro Store">
+          <div class="logo-image-wrapper">
+            <img src="assets/logo.jpg" alt="iPro Store Logo" class="brand-logo-img">
+          </div>
+        </a>
+        <p class="footer-desc" data-i18n="footerDesc">أرقى متجر لأجهزة الآيفون الأصلية والإكسسوارات في مصر وأحدث معمل صيانة فوري بقطع أصلية فابريكا وضمان رسمي معتمد.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/201017891759" target="_blank" aria-label="WhatsApp Sales" title="مبيعات الأجهزة"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://wa.me/201115373748" target="_blank" aria-label="WhatsApp Maintenance" title="قسم الصيانة"><i class="fa-solid fa-wrench"></i></a>
+          <a href="https://wa.me/201101675132" target="_blank" aria-label="WhatsApp Accessories" title="قسم الإكسسوارات"><i class="fa-solid fa-headphones"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div class="footer-col">
+        <h4 data-i18n="footerCol1">أجهزة الآيفون</h4>
+        <ul class="footer-links">
+          <li><a href="#storeSection">iPhone 18 Pro Max</a></li>
+          <li><a href="#storeSection">iPhone 17 Pro Max</a></li>
+          <li><a href="#storeSection">iPhone 16 Pro Max</a></li>
+          <li><a href="#storeSection">iPhone 15 Series</a></li>
+          <li><a href="#storeSection" data-i18n="footerUsedLink">أجهزة كسر زيرو فابريكا</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div class="footer-col">
+        <h4 data-i18n="footerCol2">الصيانة والإكسسوارات</h4>
+        <ul class="footer-links">
+          <li><a href="#accessoriesSection">شواحن ماج سيف وجرابات فاخرة</a></li>
+          <li><a href="#accessoriesSection">سماعات إيربودز وباغات 9H</a></li>
+          <li><a href="#repairSection">تغيير شاشات OLED أصلية</a></li>
+          <li><a href="#repairSection">تغيير بطاريات فابريكا 100%</a></li>
+          <li><a href="#repairSection">تغيير باغات بالليزر البارد</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4 -->
+      <div class="footer-col">
+        <h4 data-i18n="footerCol3">أرقام التواصل الرسمية</h4>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp gold-text"></i>
+          <span>مبيعات الأجهزة: <a href="https://wa.me/201017891759" target="_blank" class="gold-link">+20 101 789 1759</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-wrench gold-text"></i>
+          <span>قسم الصيانة: <a href="https://wa.me/201115373748" target="_blank" class="gold-link">+20 111 537 3748</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-headphones gold-text"></i>
+          <span>قسم الإكسسوارات: <a href="https://wa.me/201101675132" target="_blank" class="gold-link">+20 110 167 5132</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-clock gold-text"></i>
+          <span data-i18n="footerHours">يومياً من 11:00 صباحاً حتى 11:30 مساءً</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 <strong class="gold-text">iPro Store & Service Lab</strong>. جميع الحقوق محفوظة.</p>
+      <div class="footer-bottom-links">
+        <a href="https://wa.me/201017891759" target="_blank">واتساب الأجهزة</a>
+        <a href="https://wa.me/201115373748" target="_blank">واتساب الصيانة</a>
+        <a href="https://wa.me/201101675132" target="_blank">واتساب الإكسسوارات</a>
+        <a href="admin.html" class="footer-admin-pill" title="فتح لوحة تحكم المتجر">
+          <i class="fa-solid fa-sliders"></i>
+          <span data-i18n="btnAdmin">لوحة التحكم</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS & DRAWERS ================= -->
+
+  <!-- 1. ITEM DETAILS MODAL (Devices) -->
+  <div class="modal-backdrop" id="itemDetailsModal">
+    <div class="modal-box modal-luxury">
+      <button type="button" class="modal-close-btn" id="closeItemDetailsBtn" aria-label="إغلاق">&times;</button>
+      <div class="modal-grid" id="itemDetailsContent"></div>
+    </div>
+  </div>
+
+
+
+  <!-- 3. SELECTED DEVICES DRAWER -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div class="cart-header-title">
+        <i class="fa-solid fa-bag-shopping gold-text"></i>
+        <h3><span data-i18n="cartTitle">قائمة الأجهزة المختارة</span> (<span id="cartDrawerCount">0</span>)</h3>
+      </div>
+      <button type="button" class="cart-close-btn" id="closeCartBtn" aria-label="إغلاق">&times;</button>
+    </div>
+
+    <div class="cart-items-body" id="cartItemsContainer"></div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-totals">
+        <div class="total-line">
+          <span data-i18n="cartTotalItems">إجمالي الأجهزة:</span>
+          <span id="cartTotalItemsCount" class="gold-text">0 أجهزة</span>
+        </div>
+        <div class="total-line">
+          <span>واتساب المبيعات المباشر:</span>
+          <strong class="gold-text">01017891759</strong>
+        </div>
+      </div>
+      <button type="button" class="btn btn-gold btn-block" id="whatsappCheckoutBtn">
+        <i class="fa-brands fa-whatsapp" style="font-size:1.3rem;"></i>
+        <span data-i18n="btnInquireWhatsApp">إرسال القائمة لواتساب المبيعات (+201017891759)</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 4. APPOINTMENT SUCCESS MODAL -->
+  <div class="modal-backdrop" id="checkoutSuccessModal">
+    <div class="modal-box modal-success-box text-center">
+      <div class="success-icon-anim">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <div class="badge-gold"><i class="fa-solid fa-crown"></i> <span data-i18n="successBadge">تم التأكيد بنجاح</span></div>
+      <h3 id="checkoutSuccessTitle">شكراً لاختيارك iPro Store!</h3>
+      <p id="checkoutSuccessMsg">تم تسجيل طلبك وموعدك في نظامنا الفني. فريق خدمة العملاء هيتواصل معاك فوراً لتأكيد التفاصيل.</p>
+      <div class="order-id-box">
+        <span data-i18n="ticketIdLabel">كود إيصال الصيانة أو الحجز:</span>
+        <strong class="gold-text" id="orderConfirmationId">IPRO-9284-EG</strong>
+      </div>
+      <button type="button" class="btn btn-gold" id="closeSuccessModalBtn" data-i18n="btnCloseSuccess">حسناً، متابعة التصفح</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Main Website Script -->
+  <script src="index.js"></script>
+</body>
+</html>
