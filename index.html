@@ -745,10 +745,22 @@
   <!-- ================= MODALS & DRAWERS ================= -->
 
   <!-- 1. ITEM DETAILS MODAL (Devices) -->
-  <div class="modal-backdrop" id="itemDetailsModal">
+  <div class="modal-backdrop" id="productQuickModal">
     <div class="modal-box modal-luxury">
-      <button type="button" class="modal-close-btn" id="closeItemDetailsBtn" aria-label="إغلاق">&times;</button>
-      <div class="modal-grid" id="itemDetailsContent"></div>
+      <button type="button" class="modal-close-btn" id="closeProductModalBtn" aria-label="إغلاق">&times;</button>
+      <div class="badge-gold" id="modalProdBadge"><i class="fa-solid fa-crown"></i> <span>مميز</span></div>
+      <h3 id="modalProdTitle" style="color:#fff; margin:0.75rem 0 0.5rem 0; font-size:1.45rem;"></h3>
+      <div class="modal-specs-grid" id="modalSpecsGrid">
+        <div class="spec-box"><small>المعالج</small><strong id="modalChip"></strong></div>
+        <div class="spec-box"><small>الشاشة</small><strong id="modalDisplay"></strong></div>
+        <div class="spec-box"><small>الكاميرا</small><strong id="modalCamera"></strong></div>
+        <div class="spec-box"><small>البطارية</small><strong id="modalBattery"></strong></div>
+      </div>
+      <ul id="modalHighlightsList" class="modal-highlights-list"></ul>
+      <button type="button" class="btn btn-gold btn-block" id="modalDirectInquireBtn" style="margin-top:1.25rem;">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>اطلب السعر عبر واتساب</span>
+      </button>
     </div>
   </div>
 
