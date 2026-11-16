@@ -1975,24 +1975,7 @@ function showToast(message, iconClass = "fa-check") {
 
 // ================= 13. SCROLL REVEAL ANIMATIONS =================
 function initScrollAnimations() {
-
-  // 2. IntersectionObserver Scroll Reveal for Sections & Cards
-  const observerOptions = {
-    root: null,
-    rootMargin: "0px 0px -60px 0px",
-    threshold: 0.12
-  };
-
-  const revealObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Apply to all primary content cards & sections
+  // Ensure all primary content cards and sections are 100% visible immediately without delay
   const targets = document.querySelectorAll(`
     .store-section,
     .compare-section,
@@ -2011,7 +1994,6 @@ function initScrollAnimations() {
   `);
 
   targets.forEach(el => {
-    el.classList.add("scroll-reveal");
-    revealObserver.observe(el);
+    el.classList.add("revealed");
   });
 }
