@@ -977,6 +977,17 @@ function renderProducts() {
 
   container.innerHTML = "";
 
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+        <i class="fa-solid fa-box-open" style="font-size: 2.5rem; color: var(--gold-light); margin-bottom: 1rem; display: block;"></i>
+        <p style="font-size: 1.1rem; font-weight: 700; color: #fff;">${isAr ? "لا توجد أجهزة متوفرة حالياً في هذا القسم" : "No devices currently available in this category"}</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">${isAr ? "تواصل معنا مباشرة عبر واتساب لطلب أي إصدار أو حجز جهازك" : "Contact us on WhatsApp to preorder or request any model"}</p>
+      </div>
+    `;
+    return;
+  }
+
   list.forEach(phone => {
     const defaultColor = (phone.colors && phone.colors[0]) || { nameAr: "تيتانيوم صحراوي ذهبي", nameEn: "Desert Gold Titanium", hex: "#d4af37", class: "gold-edition" };
     const defaultStorage = (phone.storageOptions && phone.storageOptions[0]) || "256GB";
