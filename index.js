@@ -472,40 +472,6 @@ const DEFAULT_PHONES_CATALOG = [
       "100% battery health, zero cosmetic scratches",
       "6-Month Instant Replacement Guarantee"
     ]
-  },
-  {
-    id: "iphone-14-pro-max-used",
-    name: "iPhone 14 Pro Max (كسر زيرو)",
-    category: "used",
-    badgeAr: "فرز أول فابريكا بدون خدش",
-    badgeEn: "Grade A+ Flawless Pre-Owned",
-    conditionAr: "كسر زيرو فابريكا بالكرتونة الأصلية",
-    conditionEn: "Certified Pre-Owned in Original Box",
-    rating: 4.8,
-    reviewsCount: 310,
-    chip: "A16 Bionic Chip",
-    displayAr: "شاشة 6.7 بوصة Super Retina XDR مع Dynamic Island",
-    displayEn: "6.7-inch Super Retina XDR with Dynamic Island",
-    cameraAr: "كاميرا رئيسية 48MP مع مانع اهتزاز مستشعر الجيل الثاني",
-    cameraEn: "48MP Main Camera with Sensor-Shift OIS",
-    batteryAr: "صحة البطارية 95% - 100% أصلية فابريكا",
-    batteryEn: "Battery health 95% - 100% Original OEM",
-    storageOptions: ["128GB", "256GB", "512GB"],
-    colors: [
-      { nameAr: "ذهبي ملكي فخم", nameEn: "Royal Gold Finish", hex: "linear-gradient(135deg, #e3c988 0%, #997e3f 100%)", class: "gold-edition" }
-    ],
-    highlightsAr: [
-      "جهاز أصلي فابريكا 100% لم يتم فك أي مسمار فيه نهائياً",
-      "شاشة وبطارية أصليين بتقارير 3uTools خضراء 100%",
-      "معاه الكرتونة الأصلية وكابل الشحن الأصلي",
-      "ضمان 6 شهور كتابي معتمد من iPro Store"
-    ],
-    highlightsEn: [
-      "100% Factory original unit, never opened or repaired",
-      "Green 3uTools hardware diagnostic report 100%",
-      "Complete with original retail box & genuine cable",
-      "6-Month Certified Written Warranty"
-    ]
   }
 ];
 
@@ -939,8 +905,11 @@ function loadCatalogs() {
   try {
     const p = localStorage.getItem("ipro_phones_catalog");
     phonesCatalog = p ? JSON.parse(p) : DEFAULT_PHONES_CATALOG;
+    // Always purge removed devices such as iphone-14-pro-max-used from cache
+    phonesCatalog = phonesCatalog.filter(item => item.id !== "iphone-14-pro-max-used");
+    localStorage.setItem("ipro_phones_catalog", JSON.stringify(phonesCatalog));
   } catch (e) {
-    phonesCatalog = DEFAULT_PHONES_CATALOG;
+    phonesCatalog = DEFAULT_PHONES_CATALOG.filter(item => item.id !== "iphone-14-pro-max-used");
   }
 
   try {
@@ -1025,8 +994,10 @@ function renderProducts() {
       : ((phone.highlightsEn && phone.highlightsEn[0]) || "Official iPro Certified Warranty");
 
     card.innerHTML = `
-      <span class="product-badge-flag"><i class="fa-solid fa-crown"></i> ${badgeText}</span>
-      <span class="product-condition-tag">${conditionText}</span>
+      <div class="product-badges-header">
+        <span class="product-badge-flag"><i class="fa-solid fa-crown"></i> ${badgeText}</span>
+        <span class="product-condition-tag">${conditionText}</span>
+      </div>
 
       <div class="product-visual">
         <div class="rendered-iphone ${defaultColor.class || 'gold-edition'}" id="render-${phone.id}">
@@ -1304,8 +1275,10 @@ function renderAccessories() {
     const hasSizes = acc.storageOptions && acc.storageOptions.length > 0;
 
     card.innerHTML = `
-      <span class="product-badge-flag"><i class="fa-solid fa-crown"></i> ${badgeText}</span>
-      <span class="product-condition-tag">${conditionText}</span>
+      <div class="product-badges-header">
+        <span class="product-badge-flag"><i class="fa-solid fa-crown"></i> ${badgeText}</span>
+        <span class="product-condition-tag">${conditionText}</span>
+      </div>
 
       <div class="product-visual accessory-visual-box">
         ${visualHtml}

@@ -81,21 +81,6 @@ const DEFAULT_PHONES_CATALOG = [
     colors: [
       { nameAr: "تيتانيوم طبيعي", hex: "linear-gradient(135deg, #c2bdae 0%, #706b60 100%)" }
     ]
-  },
-  {
-    id: "iphone-14-pro-max-used",
-    name: "iPhone 14 Pro Max (كسر زيرو فابريكا)",
-    category: "certified",
-    badgeAr: "كسر زيرو فرز أول فابريكا",
-    conditionAr: "استعمال خفيف - بطارية 95%+ فابريكا",
-    inStock: true,
-    chip: "A16 Bionic (4nm)",
-    displayAr: "شاشة 6.7 بوصة Super Retina XDR OLED 120Hz",
-    cameraAr: "كاميرا 48MP بدقة فائقة وتصوير سينمائي 4K",
-    storageOptions: ["128GB", "256GB", "512GB"],
-    colors: [
-      { nameAr: "ذهبي فخم", hex: "linear-gradient(135deg, #fae7a5 0%, #a68434 100%)" }
-    ]
   }
 ];
 
@@ -312,8 +297,10 @@ function loadAllData() {
   try {
     const p = localStorage.getItem("ipro_phones_catalog");
     phones = p ? JSON.parse(p) : DEFAULT_PHONES_CATALOG;
+    phones = phones.filter(item => item.id !== "iphone-14-pro-max-used");
+    localStorage.setItem("ipro_phones_catalog", JSON.stringify(phones));
   } catch (e) {
-    phones = DEFAULT_PHONES_CATALOG;
+    phones = DEFAULT_PHONES_CATALOG.filter(item => item.id !== "iphone-14-pro-max-used");
   }
 
   // Accessories
